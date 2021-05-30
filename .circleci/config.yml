@@ -52,7 +52,7 @@ jobs:
             - .circleci/config.yml
   deploy-to-dev:
     docker:
-      - image: mafgalaxy.azurecr.io/digitalplatform/dpdeployer:stable
+      - image: mafgalaxy.azurecr.io/digitalplatform/dpdeployer:azautoscaleone
 
         auth:
           username: $REGISTRY_UN
