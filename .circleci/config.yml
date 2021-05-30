@@ -3,7 +3,7 @@ jobs:
   build:
     working_directory: ~/java
     docker:
-      - image: 'circleci/openjdk:8-jdk-stretch'
+      - image: 'circleci/openjdk:11-jdk-stretch'
     steps:
       - checkout
       - restore_cache:
@@ -14,63 +14,82 @@ jobs:
             - ~/.m2
           key: 'circleci-java-{{ checksum "pom.xml" }}'
       - run:
-          command: >
+          name: "build & package"
+          command: |
+            mvn verify sonar:sonar
             mvn test package
-
             mkdir -p artifact
-
             cp target/*.jar artifact/app.jar
-
-            cp src/main/resources/*.jar
-            artifact/applicationinsights-agent-2.6.1.jar
-
-            cp src/main/resources/AI-Agent.xml artifact/AI-Agent.xml
-
             cd artifact
+            zip ../app.zip app.jar
+      - setup_remote_docker:
+          docker_layer_caching: true
+      - run:
+          name: Build and push image
+          command: |
+            mvn clean install
+            mkdir -p artifact
+            cp target/*.jar artifact/app.jar
+            cd artifact
+            zip ../app.zip app.jar
 
-            zip ../app.zip app.jar applicationinsights-agent-2.6.1.jar
-            AI-Agent.xml
       - store_test_results:
           path: target/surefire-reports
       - store_artifacts:
           path: artifact/app.jar
+      - store_artifacts:
+          path: artifact/applicationinsights-agent-2.6.1.jar
+      - store_artifacts:
+          path: artifact/AI-Agent.xml
       - persist_to_workspace:
           root: ~/java
           paths:
             - app.zip
             - .dp.yaml
+            - applicationinsights-agent-2.6.1.jar
+            - AI-Agent.xml
+            - version
+            - .circleci/config.yml
   deploy-to-dev:
     docker:
-      - image: 'mafgalaxy.azurecr.io/digitalplatform/dpdeployer:stable'
+      - image: mafgalaxy.azurecr.io/digitalplatform/dpdeployer:stable
+
         auth:
           username: $REGISTRY_UN
           password: $REGISTRY_PW
     steps:
-      - attach_workspace:
+      -
+        attach_workspace:
           at: ~/config
-      - run:
+      -
+        run:
           command: |
             cd /dp
             ./deploy.sh .dp.yaml
   deploy-to-prod:
     docker:
-      - image: 'mafgalaxy.azurecr.io/digitalplatform/dpdeployer:stable'
+      - image: mafgalaxy.azurecr.io/digitalplatform/dpdeployer:stable
         auth:
           username: $REGISTRY_UN
           password: $REGISTRY_PW
     steps:
-      - attach_workspace:
+      -
+        attach_workspace:
           at: ~/config
-      - run:
+      -
+        run:
           command: |
             cd /dp
-            ./deploy.sh .dp.yaml
+            export TAG=`cat config/version`
+            ./deploy.sh prod.dp.yaml
 workflows:
   version: 2
   build-deploy:
     jobs:
       - build:
-          context: dpdeployer
+          context:
+            - SonarCloud
+            - dpdeployer
       - deploy-to-dev:
           context: dpdeployer
           requires:
