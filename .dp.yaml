@@ -1,6 +1,7 @@
 application: azautoscale
 productOwner: sarora@mafcarrefour.com
 region: uaenorth
+productName: azautoscale
 services:
   - name: svc
     config:
