@@ -1,0 +1,97 @@
+version: 2.1
+jobs:
+  build:
+    working_directory: ~/java
+    docker:
+      - image: 'circleci/openjdk:8-jdk-stretch'
+    steps:
+      - checkout
+      - restore_cache:
+          key: 'circleci-java-{{ checksum "pom.xml" }}'
+      - run: 'mvn dependency:go-offline'
+      - save_cache:
+          paths:
+            - ~/.m2
+          key: 'circleci-java-{{ checksum "pom.xml" }}'
+      - run:
+          command: >
+            mvn test package
+
+            mkdir -p artifact
+
+            cp target/*.jar artifact/app.jar
+
+            cp src/main/resources/*.jar
+            artifact/applicationinsights-agent-2.6.1.jar
+
+            cp src/main/resources/AI-Agent.xml artifact/AI-Agent.xml
+
+            cd artifact
+
+            zip ../app.zip app.jar applicationinsights-agent-2.6.1.jar
+            AI-Agent.xml
+      - store_test_results:
+          path: target/surefire-reports
+      - store_artifacts:
+          path: artifact/app.jar
+      - persist_to_workspace:
+          root: ~/java
+          paths:
+            - app.zip
+            - .dp.yaml
+  deploy-to-dev:
+    docker:
+      - image: 'mafgalaxy.azurecr.io/digitalplatform/dpdeployer:stable'
+        auth:
+          username: $REGISTRY_UN
+          password: $REGISTRY_PW
+    steps:
+      - attach_workspace:
+          at: ~/config
+      - run:
+          command: |
+            cd /dp
+            ./deploy.sh .dp.yaml
+  deploy-to-prod:
+    docker:
+      - image: 'mafgalaxy.azurecr.io/digitalplatform/dpdeployer:stable'
+        auth:
+          username: $REGISTRY_UN
+          password: $REGISTRY_PW
+    steps:
+      - attach_workspace:
+          at: ~/config
+      - run:
+          command: |
+            cd /dp
+            ./deploy.sh .dp.yaml
+workflows:
+  version: 2
+  build-deploy:
+    jobs:
+      - build:
+          context: dpdeployer
+      - deploy-to-dev:
+          context: dpdeployer
+          requires:
+            - build
+          filters:
+            branches:
+              only:
+                - develop
+      - deploy-to-prod-approval:
+          type: approval
+          requires:
+            - build
+          filters:
+            branches:
+              only:
+                - master
+      - deploy-to-prod:
+          context: dpdeployer
+          requires:
+            - deploy-to-prod-approval
+          filters:
+            branches:
+              only:
+                - master
