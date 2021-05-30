@@ -1,0 +1,15 @@
+application: azautoscale
+productOwner: sarora@mafcarrefour.com
+region: uaenorth
+services:
+  - name: svc
+    config:
+      category: appservice
+      isDockerised: false
+      port: 80
+      tiersize: P1v2
+      stack: JAVA|8-jre8
+      envVariables: []
+      healthcheck: /
+      serviceType: api
+      source: 'https://bitbucket.org/c4hybris/azautoscale'
