@@ -12,4 +12,4 @@ services:
       envVariables: []
       healthcheck: /
       serviceType: api
-      source: 'https://bitbucket.org/c4hybris/azautoscale'
+      source: 'https://bitbucket.org/c4hybris/azautoscale' 
