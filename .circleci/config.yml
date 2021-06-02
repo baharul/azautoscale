@@ -52,7 +52,7 @@ jobs:
             - .circleci/config.yml
   deploy-to-dev:
     docker:
-      - image: mafgalaxy.azurecr.io/digitalplatform/dpdeployer:addingdelay
+      - image: mafgalaxy.azurecr.io/digitalplatform/dpdeployer:outputchange
 
         auth:
           username: $REGISTRY_UN
