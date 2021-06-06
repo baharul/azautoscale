@@ -17,7 +17,7 @@ public class HelloController {
 
 	@GetMapping("/")
 	ResponseEntity<String> hello() {
-		return new ResponseEntity<>("Service is Down", HttpStatus.BAD_GATEWAY);
+		return new ResponseEntity<>("Service is Down", HttpStatus.SERVICE_UNAVAILABLE);
 	}
 }
 
