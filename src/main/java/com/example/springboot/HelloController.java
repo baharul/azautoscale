@@ -11,14 +11,14 @@ public class HelloController {
 
 	@RequestMapping("/health")
 	public String index() {
-		return ("Release Version V-12 is running . Checking Autoscale logic!!");
+		return ("Release Version V-12 is running . Health is good!!");
 	}
 
 
-	@GetMapping("/")
-	ResponseEntity<String> hello() {
-		return new ResponseEntity<>("Service is Down", HttpStatus.SERVICE_UNAVAILABLE);
-	}
+//	@GetMapping("/")
+//	ResponseEntity<String> hello() {
+//		return new ResponseEntity<>("Service is Down", HttpStatus.SERVICE_UNAVAILABLE);
+//	}
 }
 
 

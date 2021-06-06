@@ -45,6 +45,36 @@
 			<scope>test</scope>
 		</dependency>
 		<!-- end::tests[] -->
+
+		<!-- For Application Insights on Azure (logs)       -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-log4j2</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.microsoft.azure</groupId>
+			<artifactId>applicationinsights-spring-boot-starter</artifactId>
+			<version>2.6.2</version>
+		</dependency>
+		<dependency>
+			<groupId>com.microsoft.azure</groupId>
+			<artifactId>applicationinsights-logging-log4j2</artifactId>
+			<version>2.6.2</version>
+		</dependency>
+		<dependency>
+			<groupId>com.microsoft.azure</groupId>
+			<artifactId>applicationinsights-core</artifactId>
+			<version>2.4.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.microsoft.azure</groupId>
+			<artifactId>applicationinsights-web-auto</artifactId>
+			<!-- or applicationinsights-web for manual web filter registration -->
+			<!-- or applicationinsights-core for bare API -->
+			<version>2.5.0</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>
