@@ -17,14 +17,6 @@ services:
           value: "$$.active-profile"
         - name: "mongoDBConnectionString"
           value: "$$.mongo-db-connection-string"
-        - name: "secretKey"
-          value: "$$.secret-key"
-        - name: "instrumentationKey"
-          value: "$$.instrumentation-key"
-        - name: "apiKey"
-          value: "$$.api-key"
-        - name: "redisPassword"
-          value: "$$.redis-password"
       healthcheck: /health
       serviceType: api
       source: 'https://bitbucket.org/c4hybris/azautoscale' 
