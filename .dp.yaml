@@ -11,6 +11,6 @@ services:
       tiersize: P1v2
       stack: JAVA|8-jre8
       envVariables: []
-      healthcheck: /
+      healthcheck: /health
       serviceType: api
       source: 'https://bitbucket.org/c4hybris/azautoscale' 
