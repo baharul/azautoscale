@@ -52,7 +52,7 @@ jobs:
             - .circleci/config.yml
   deploy-to-dev:
     docker:
-      - image: mafgalaxy.azurecr.io/digitalplatform/dpdeployer:buildinfo
+      - image: mafgalaxy.azurecr.io/digitalplatform/dpdeployer:lmeta
 
         auth:
           username: $REGISTRY_UN
