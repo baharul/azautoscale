@@ -10,7 +10,21 @@ services:
       port: 80
       tiersize: P1v2
       stack: JAVA|8-jre8
-      envVariables: []
+      envVariables:
+        - name: JAVA_OPTS
+          value: '-javaagent:/local/site/wwwroot/applicationinsights-agent-2.6.1.jar'
+        - name: "activeProfile"
+          value: "$$.active-profile"
+        - name: "mongoDBConnectionString"
+          value: "$$.mongo-db-connection-string"
+        - name: "secretKey"
+          value: "$$.secret-key"
+        - name: "instrumentationKey"
+          value: "$$.instrumentation-key"
+        - name: "apiKey"
+          value: "$$.api-key"
+        - name: "redisPassword"
+          value: "$$.redis-password"
       healthcheck: /health
       serviceType: api
       source: 'https://bitbucket.org/c4hybris/azautoscale' 
