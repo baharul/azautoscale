@@ -2,7 +2,7 @@ application: azautoscale
 productOwner: sarora@mafcarrefour.com
 region: uaenorth
 productName: azautoscale
-enableLogAnalytics: true
+enableLogAnalytics: true 
 services:
   - name: svc
     config:
