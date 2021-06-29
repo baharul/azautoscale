@@ -2,6 +2,7 @@ application: azautoscale
 productOwner: sarora@mafcarrefour.com
 region: uaenorth
 productName: azautoscale
+enableloganalytics: true
 services:
   - name: svc
     config:
@@ -19,5 +20,4 @@ services:
           value: "$$.mongo-db-connection-string"
       healthcheck: /health
       serviceType: api
-      enableloganalytics: true
       source: 'https://bitbucket.org/c4hybris/azautoscale' 
