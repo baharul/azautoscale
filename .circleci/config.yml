@@ -46,6 +46,7 @@ jobs:
           paths:
             - app.zip
             - .dp.yaml
+            - prod.dp.yaml
             - applicationinsights-agent-2.6.1.jar
             - AI-Agent.xml
             - version
