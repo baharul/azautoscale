@@ -13,10 +13,6 @@ services:
       envVariables:
         - name: JAVA_OPTS
           value: '-javaagent:/local/site/wwwroot/applicationinsights-agent-2.6.1.jar'
-        - name: "activeProfile"
-          value: "$$.active-profile"
-        - name: "mongoDBConnectionString"
-          value: "$$.mongo-db-connection-string"
       healthcheck: /health
       serviceType: api
       source: 'https://bitbucket.org/c4hybris/azautoscale' 
