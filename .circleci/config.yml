@@ -65,7 +65,7 @@ jobs:
         run:
           command: |
             cd /dp
-            ./deploy.sh .dp.yaml
+            ./deploy.sh prod.dp.yaml
   deploy-to-prod:
     docker:
       - image: mafgalaxy.azurecr.io/digitalplatform/dpdeployer:stable
