@@ -13,6 +13,6 @@ services:
       envVariables:
         - name: JAVA_OPTS
           value: '-javaagent:/local/site/wwwroot/applicationinsights-agent-2.6.1.jar'
-      healthcheck: /health
+      healthcheck: /health 
       serviceType: api
       source: 'https://bitbucket.org/c4hybris/azautoscale' 
