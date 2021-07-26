@@ -7,7 +7,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 
 import java.util.Arrays;
-//sample cder adding sample 
+//sample cder adding samplee
 
 @SpringBootApplication
 public class Application {
