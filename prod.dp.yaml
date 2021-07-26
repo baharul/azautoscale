@@ -16,3 +16,5 @@ services:
       healthcheck: /health
       serviceType: api
       source: 'https://bitbucket.org/c4hybris/azautoscale' 
+      
+      
