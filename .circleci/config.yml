@@ -53,7 +53,7 @@ jobs:
             - .circleci/config.yml
   deploy-to-dev:
     docker:
-      - image: mafgalaxy.azurecr.io/digitalplatform/dpdeployer:terraformRun 
+      - image: mafgalaxy.azurecr.io/digitalplatform/dpdeployer:k8sprojectname 
 
         auth:
           username: $REGISTRY_UN

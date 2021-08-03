@@ -1,18 +1,33 @@
 application: azautoscale
-productOwner: sarora@mafcarrefour.com
+productOwner: bahkhan@mafcarrefour.com
 region: uaenorth
-productName: azautoscale 
+productName: azautoscale
+disableAlerting: true
+k8sEnabled: true
 services:
-  - name: svc
+  ############## sample COSMOSDB SERVICE ################
+          
+  - name: "azautoscaledb"
     config:
-      category: appservice
-      isDockerised: false
-      port: 80
-      tiersize: P1v2
-      stack: JAVA|8-jre8
-      envVariables:
-        - name: JAVA_OPTS
-          value: '-javaagent:/local/site/wwwroot/applicationinsights-agent-2.6.1.jar'
-      healthcheck: /health 
-      serviceType: api
-      source: 'https://bitbucket.org/c4hybris/azautoscale' 
+      category: "cosmosdb"
+      location: "uaenorth"
+      serviceType: "mongodb"
+      consistency: "BoundedStaleness"
+      databaseList:
+        - azautoscale
+
+  - name: "azautoscale-dev"
+    config:
+      category: "cache"
+      shards: 3
+      tiersize: "C0"
+      evictionpolicy: "volatile-lru"
+      location: "westindia"  
+
+  - name: blob
+    config:
+      category: blob
+      storage: 
+        - name: azautoscale-service-dev
+          blobType: block
+          accessType: blob  
