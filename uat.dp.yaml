@@ -1,0 +1,19 @@
+application: azautoscale
+productOwner: bahkhan@mafcarrefour.com
+region: uaenorth
+productName: azautoscale
+disableAlerting: true
+services:
+  - name: svc
+    config:
+      category: appservice
+      isDockerised: false
+      port: 80
+      tiersize: P1v2
+      stack: JAVA|8-jre8
+      envVariables:
+        - name: JAVA_OPTS
+          value: "-javaagent:/local/site/wwwroot/applicationinsights-agent-2.6.1.jar"
+      healthcheck: /health
+      serviceType: api
+      source: "https://bitbucket.org/c4hybris/azautoscale"
