@@ -69,7 +69,7 @@ jobs:
 
   deploy-to-uat:
     docker:
-      - image: mafgalaxy.azurecr.io/digitalplatform/dpdeployer:testgrafv11
+      - image: mafgalaxy.azurecr.io/digitalplatform/dpdeployer:stable-noinfra
         environment:
           TF_VAR_repo_branch: uat
         auth:

@@ -17,3 +17,11 @@ services:
       healthcheck: /health
       serviceType: api
       source: "https://bitbucket.org/c4hybris/azautoscale"
+
+  - name: blob
+    config:
+      category: blob
+      storage:
+        - name: azautoscale-service-uat
+          blobType: block
+          accessType: blob
