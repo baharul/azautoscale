@@ -11,7 +11,7 @@ public class HelloController {
 
 	@RequestMapping("/health")
 	public String index() {
-		return ("Release Version V-12 is running . Health is good. Team is good.sdas!!");
+		return ("Release Version V-12 is running . Feature-1 Edit");
 	}
 
 

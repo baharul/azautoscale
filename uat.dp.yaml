@@ -3,7 +3,6 @@ productOwner: bahkhan@mafcarrefour.com
 region: uaenorth
 productName: azautoscale
 disableAlerting: true
-TF_VAR_repo_branch: uat
 services:
   - name: svc
     config:
