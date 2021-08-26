@@ -55,7 +55,7 @@ jobs:
 
   deploy-to-dev:
     docker:
-      - image: mafgalaxy.azurecr.io/digitalplatform/dpdeployer:k8sprojectname
+      - image: mafgalaxy.azurecr.io/digitalplatform/dpdeployer:stable-noinfra
         auth:
           username: $REGISTRY_UN
           password: $REGISTRY_PW
