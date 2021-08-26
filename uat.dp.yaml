@@ -23,6 +23,6 @@ services:
     config:
       category: blob
       storage:
-        - name: azautoscale-service-uat
+        - name: azautoscale-service-newname
           blobType: block
           accessType: blob
