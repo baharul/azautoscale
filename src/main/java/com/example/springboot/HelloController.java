@@ -10,9 +10,10 @@ import org.springframework.web.bind.annotation.RestController;
 public class HelloController {
 
 	@RequestMapping("/health")
-	public String index() {
-		return ("Release Version V-12 is running . Dummy commit!!");
+	public ResponseEntity<String> index() {
+		return new ResponseEntity<>("{\"Release Version V1.0 is Running!\" : \"Success\"}", HttpStatus.OK);
 	}
+
 
 
 //	@GetMapping("/")
