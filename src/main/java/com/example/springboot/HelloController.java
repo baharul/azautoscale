@@ -11,15 +11,8 @@ public class HelloController {
 
 	@RequestMapping("/health")
 	public ResponseEntity<String> index() {
-		return new ResponseEntity<>("{\"Release Version V1.0 is Running!\" : \"Success\"}", HttpStatus.OK);
+		return new ResponseEntity<>("{\"Release Version V3.0 is Running!\" : \"Success\"}", HttpStatus.OK);
 	}
-
-
-
-//	@GetMapping("/")
-//	ResponseEntity<String> hello() {
-//		return new ResponseEntity<>("Service is Down", HttpStatus.SERVICE_UNAVAILABLE);
-//	}
 }
 
 
